@@ -17,7 +17,7 @@ public class PaymentController {
     private final PaymentOrchestrationService service;
 
     @PostMapping("/payment")
-    public ResponseEntity<Response> requestPaymen(@RequestBody ClientReq req){
+    public ResponseEntity<Response> requestPayment(@RequestBody ClientReq req){
        Response response = service.idempotencyLogic(req);
        if(response.getStatus() == Status.INITIALIZED) 
            return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
