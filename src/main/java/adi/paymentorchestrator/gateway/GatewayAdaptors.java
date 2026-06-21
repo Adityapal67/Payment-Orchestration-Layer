@@ -6,6 +6,6 @@ import adi.paymentorchestrator.gateway.dto.gatewayRes;
 public interface GatewayAdaptors {
      gatewayRes processPayment(gatewayReq req);
 
-     String getname();
+     String getName();
 
 }

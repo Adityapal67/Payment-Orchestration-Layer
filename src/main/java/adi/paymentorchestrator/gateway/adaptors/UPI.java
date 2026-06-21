@@ -40,7 +40,7 @@ public class UPI implements GatewayAdaptors {
         }catch (InterruptedException e){}
 
         return gatewayRes.builder()
-                .gatewayName(getname())
+                .gatewayName(getName())
                 .latency(latencyms)
                 .status(outcome)
                 .gatewayId(outcome == GatewayStatus.GATEWAY_TIMEOUT ? null:"upi-"+ UUID.randomUUID().toString().substring(0,5))
@@ -48,7 +48,7 @@ public class UPI implements GatewayAdaptors {
     }
 
     @Override
-    public String getname() {
+    public String getName() {
         return "UPI";
     }
 }

@@ -43,7 +43,7 @@ public class Razorpay implements GatewayAdaptors {
             Thread.sleep(200);
         }catch (InterruptedException e){}
         return gatewayRes.builder()
-                .gatewayName(getname())
+                .gatewayName(getName())
                 .latency(latencyms)
                 .status(outcome)
                 .gatewayId(outcome == GatewayStatus.GATEWAY_TIMEOUT ? null:"rzp-"+ UUID.randomUUID().toString().substring(0,5))
@@ -51,7 +51,7 @@ public class Razorpay implements GatewayAdaptors {
     }
 
     @Override
-    public String getname() {
+    public String getName() {
         return "RazorPay";
     }
 }
