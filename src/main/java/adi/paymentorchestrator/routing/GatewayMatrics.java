@@ -10,4 +10,5 @@ import lombok.*;
 public class GatewayMatrics {
     private double successRate;
     private double latencyRate;
+    private int sampleCount;
 }

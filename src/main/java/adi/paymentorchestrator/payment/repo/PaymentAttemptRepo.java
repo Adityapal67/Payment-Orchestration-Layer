@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface PaymentAttemptRepo extends JpaRepository<PaymentAttempt, String> {
+public interface PaymentAttemptRepo extends JpaRepository<PaymentAttempt, Long> {
     Optional<PaymentAttempt> findByIdempotencyKey(String idempotencyKey);
+
+    long countByIdempotencyKey(String idempotencyKey);
 }

@@ -1,21 +1,24 @@
 package adi.paymentorchestrator.gateway.adaptors;
 
 import adi.paymentorchestrator.gateway.GatewayAdaptors;
+import adi.paymentorchestrator.gateway.MockControl;
 import adi.paymentorchestrator.gateway.dto.GatewayStatus;
 import adi.paymentorchestrator.gateway.dto.gatewayReq;
 import adi.paymentorchestrator.gateway.dto.gatewayRes;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-public class UPI implements GatewayAdaptors {
-    @Value("gateway.upi.latency-ms")
+@Component
+public class UPI implements GatewayAdaptors, MockControl {
+    @Value("${gateway.upi.latency-ms}")
     private long latency;
-    @Value("gateway.upi.max-latency-ms")
+    @Value("${gateway.upi.max-latency-ms}")
     private long maxLatency;
-    @Value("gateway.upi.timeout-rate")
+    @Value("${gateway.upi.timeout-rate}")
     private double timeOut;
-    @Value("gateway.upi.success-rate")
+    @Value("${gateway.upi.success-rate}")
     private double successRate;
 
     @Override
@@ -51,4 +54,13 @@ public class UPI implements GatewayAdaptors {
     public String getName() {
         return "UPI";
     }
+
+    @Override
+    public void setSuccessRate(double successRate) { this.successRate = successRate; }
+    @Override
+    public void setTimeoutRate(double timeoutRate) { this.timeOut = timeoutRate; }
+    @Override
+    public double getSuccessRate() { return successRate; }
+    @Override
+    public double getTimeoutRate() { return timeOut; }
 }

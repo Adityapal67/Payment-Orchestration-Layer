@@ -1,6 +1,7 @@
 package adi.paymentorchestrator.gateway.adaptors;
 
 import adi.paymentorchestrator.gateway.GatewayAdaptors;
+import adi.paymentorchestrator.gateway.MockControl;
 import adi.paymentorchestrator.gateway.dto.GatewayStatus;
 import adi.paymentorchestrator.gateway.dto.gatewayReq;
 import adi.paymentorchestrator.gateway.dto.gatewayRes;
@@ -10,14 +11,14 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class Stripe implements GatewayAdaptors {
-    @Value("gateway.stripe.latency-ms")
+public class Stripe implements GatewayAdaptors, MockControl {
+    @Value("${gateway.stripe.latency-ms}")
     private long latency;
-    @Value("gateway.stripe.max-latency-ms")
+    @Value("${gateway.stripe.max-latency-ms}")
     private long maxLatency;
-    @Value("gateway.stripe.timeout-rate")
+    @Value("${gateway.stripe.timeout-rate}")
     private double timeOut;
-    @Value("gateway.stripe.success-rate")
+    @Value("${gateway.stripe.success-rate}")
     private double successRate;
 
     @Override
@@ -54,4 +55,13 @@ public class Stripe implements GatewayAdaptors {
     public String getName() {
         return "Stripe";
     }
+
+    @Override
+    public void setSuccessRate(double successRate) { this.successRate = successRate; }
+    @Override
+    public void setTimeoutRate(double timeoutRate) { this.timeOut = timeoutRate; }
+    @Override
+    public double getSuccessRate() { return successRate; }
+    @Override
+    public double getTimeoutRate() { return timeOut; }
 }

@@ -1,6 +1,7 @@
 package adi.paymentorchestrator.gateway.adaptors;
 
 import adi.paymentorchestrator.gateway.GatewayAdaptors;
+import adi.paymentorchestrator.gateway.MockControl;
 import adi.paymentorchestrator.gateway.dto.GatewayStatus;
 import adi.paymentorchestrator.gateway.dto.gatewayReq;
 import adi.paymentorchestrator.gateway.dto.gatewayRes;
@@ -10,15 +11,15 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class Razorpay implements GatewayAdaptors {
+public class Razorpay implements GatewayAdaptors, MockControl {
 
-    @Value("gateway.razorpay.latency-ms")
+    @Value("${gateway.razorpay.latency-ms}")
     private long latency;
-    @Value("gateway.razorpay.max-latency-ms")
+    @Value("${gateway.razorpay.max-latency-ms}")
     private long maxLatency;
-    @Value("gateway.razorpay.timeout-rate")
+    @Value("${gateway.razorpay.timeout-rate}")
     private double timeOut;
-    @Value("gateway.razorpay.success-rate")
+    @Value("${gateway.razorpay.success-rate}")
     private double successRate;
 
 
@@ -54,4 +55,13 @@ public class Razorpay implements GatewayAdaptors {
     public String getName() {
         return "RazorPay";
     }
+
+    @Override
+    public void setSuccessRate(double successRate) { this.successRate = successRate; }
+    @Override
+    public void setTimeoutRate(double timeoutRate) { this.timeOut = timeoutRate; }
+    @Override
+    public double getSuccessRate() { return successRate; }
+    @Override
+    public double getTimeoutRate() { return timeOut; }
 }
